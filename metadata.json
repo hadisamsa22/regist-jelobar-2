@@ -1,0 +1,6 @@
+{
+  "name": "FORM REGISTRASI JELOBAR",
+  "description": "Aplikasi Registrasi Event & Database Realtime Jelobar dengan verifikasi pembayaran, nomor booking unik, cetak kartu peserta, dan asisten cerdas Gemini.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

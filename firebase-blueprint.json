@@ -1,0 +1,116 @@
+{
+  "entities": {
+    "Peserta": {
+      "title": "Peserta",
+      "description": "Data pendaftaran peserta event Jelobar",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "noRegistrasi": { "type": "string" },
+        "nama": { "type": "string" },
+        "noHp": { "type": "string" },
+        "club": { "type": "string" },
+        "asalInstansi": { "type": "string" },
+        "alamat": { "type": "string" },
+        "namaJersey": { "type": "string" },
+        "ukuranJersey": { "type": "string" },
+        "tanggalRegistrasi": { "type": "string" },
+        "buktiPembayaran": { "type": "string" },
+        "statusRegistrasi": { "type": "string" },
+        "statusPembayaran": { "type": "string" },
+        "nominal": { "type": "number" },
+        "createdBy": { "type": "string" },
+        "qrCodeText": { "type": "string" }
+      },
+      "required": ["noRegistrasi", "nama", "noHp", "club", "ukuranJersey", "statusRegistrasi", "statusPembayaran"]
+    },
+    "Pembayaran": {
+      "title": "Pembayaran",
+      "description": "Riwayat transaksi pembayaran pendaftaran peserta",
+      "type": "object",
+      "properties": {
+        "idTransaksi": { "type": "string" },
+        "noRegistrasi": { "type": "string" },
+        "namaPeserta": { "type": "string" },
+        "club": { "type": "string" },
+        "tanggal": { "type": "string" },
+        "nominal": { "type": "number" },
+        "metodePembayaran": { "type": "string" },
+        "rekeningTujuan": { "type": "string" },
+        "buktiPembayaran": { "type": "string" },
+        "status": { "type": "string" },
+        "catatan": { "type": "string" }
+      },
+      "required": ["idTransaksi", "noRegistrasi", "nominal", "status"]
+    },
+    "RekeningBank": {
+      "title": "RekeningBank",
+      "description": "Rekening bank panitia untuk pembayaran event",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "namaBank": { "type": "string" },
+        "nomorRekening": { "type": "string" },
+        "atasNama": { "type": "string" },
+        "keterangan": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["namaBank", "nomorRekening", "atasNama", "status"]
+    },
+    "Pengaturan": {
+      "title": "Pengaturan",
+      "description": "Konfigurasi informasi resmi event",
+      "type": "object",
+      "properties": {
+        "NAMA_EVENT": { "type": "string" },
+        "LOGO": { "type": "string" },
+        "TANGGAL_EVENT": { "type": "string" },
+        "LOKASI": { "type": "string" },
+        "KUOTA": { "type": "string" },
+        "BIAYA": { "type": "string" },
+        "UKURAN_JERSEY": { "type": "string" },
+        "WA_ADMIN": { "type": "string" },
+        "DESKRIPSI_EVENT": { "type": "string" },
+        "INFO_PEMBAYARAN": { "type": "string" },
+        "INFO_KARTU": { "type": "string" }
+      },
+      "required": ["NAMA_EVENT", "TANGGAL_EVENT", "KUOTA", "BIAYA"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Catatan riwayat aktivitas sistem",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "username": { "type": "string" },
+        "aksi": { "type": "string" },
+        "noRegistrasi": { "type": "string" },
+        "keterangan": { "type": "string" }
+      },
+      "required": ["timestamp", "username", "aksi", "keterangan"]
+    }
+  },
+  "firestore": {
+    "/peserta/{noRegistrasi}": {
+      "schema": { "$ref": "#/entities/Peserta" },
+      "description": "Dokumen peserta terdaftar berdasarkan no registrasi"
+    },
+    "/pembayaran/{idTransaksi}": {
+      "schema": { "$ref": "#/entities/Pembayaran" },
+      "description": "Dokumen transaksi pembayaran peserta"
+    },
+    "/rekening_bank/{bankId}": {
+      "schema": { "$ref": "#/entities/RekeningBank" },
+      "description": "Rekening bank panitia resmi"
+    },
+    "/pengaturan/event_config": {
+      "schema": { "$ref": "#/entities/Pengaturan" },
+      "description": "Pengaturan tunggal event"
+    },
+    "/audit_logs/{logId}": {
+      "schema": { "$ref": "#/entities/AuditLog" },
+      "description": "Catatan log audit sistem"
+    }
+  }
+}
